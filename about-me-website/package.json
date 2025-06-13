@@ -1,0 +1,16 @@
+{
+  "name": "about-me-website",
+  "version": "1.0.0",
+  "description": "A personal 'About Me' website showcasing information and interests.",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "open src/index.html"
+  },
+  "keywords": [
+    "about",
+    "personal",
+    "website"
+  ],
+  "author": "",
+  "license": "ISC"
+}

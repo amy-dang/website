@@ -3,24 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Amy's Mountain Joke</title>
+  <title>About Amy</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f0f4f8; color: #222; margin: 0; padding: 0; }
-    .container { max-width: 500px; margin: 40px auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 32px; text-align: center; }
-    img { width: 100%; max-width: 350px; border-radius: 8px; margin: 20px 0; }
-    h1 { margin-top: 0; }
-    .joke { margin-top: 32px; font-size: 1.1em; }
-    .punchline { font-weight: bold; color: #2a7b3f; margin-top: 12px; }
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: 'Playfair Display', serif;
+      color: #fff;
+      background: linear-gradient(135deg, #f8bbd0 0%, #f06292 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .overlay {
+      background: rgba(30, 41, 59, 0.55);
+      border-radius: 24px;
+      padding: 48px 36px;
+      box-shadow: 0 8px 32px 0 rgba(30,41,59,0.18);
+      text-align: center;
+    }
+    .time {
+      font-size: 4em;
+      letter-spacing: 2px;
+      margin: 0;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Amy</h1>
-    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Mountain">
-    <div class="joke">
-      <div>Knock knock.<br>Who's there?<br>Lettuce.<br>Lettuce who?</div>
-      <div class="punchline">Lettuce in! It's cold out here.</div>
-    </div>
+  <div class="overlay">
+    <div id="time" class="time"></div>
   </div>
+  <script>
+    function updateTime() {
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      document.getElementById('time').textContent = `${hours}:${minutes} ${ampm}`;
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+  </script>
 </body>
 </html>
