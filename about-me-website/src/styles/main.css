@@ -43,3 +43,39 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+.navbar {
+    background: #222;
+    color: #fff;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border-radius: 8px;
+}
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+.navbar li {
+    margin: 0 20px;
+}
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 18px 0;
+    display: block;
+    transition: color 0.2s;
+}
+.navbar a:hover {
+    color: #ffd700;
+}
+
+.outlined-navbar {
+    border: 3px solid #ffd700;
+    outline: 3px solid #222;
+    outline-offset: 3px;
+}
