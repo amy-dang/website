@@ -3,40 +3,209 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Amy</title>
+  <title>Minimal Clock & Quote</title>
+  <link rel="stylesheet" href="main.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
     body {
-      min-height: 100vh;
-      margin: 0;
-      padding: 0;
-      font-family: 'Playfair Display', serif;
-      color: #fff;
-      background: linear-gradient(135deg, #f8bbd0 0%, #f06292 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-    }
-    .overlay {
-      background: rgba(30, 41, 59, 0.55);
-      border-radius: 24px;
-      padding: 48px 36px;
-      box-shadow: 0 8px 32px 0 rgba(30,41,59,0.18);
-      text-align: center;
-    }
-    .time {
-      font-size: 4em;
-      letter-spacing: 2px;
+      min-height: 100vh;
       margin: 0;
+      background: linear-gradient(135deg, #f8bbd0 0%, #f06292 100%) fixed;
+    }
+    .center-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+    }
+    .quote {
+      font-size: 1.5em;
+      color: #fff;
+      margin-bottom: 32px;
+      text-align: center;
+      max-width: 600px;
+      text-shadow: 0 2px 8px #c2185b44;
+    }
+    .clock {
+      font-size: 4em;
+      color: #fff;
+      text-shadow: 0 2px 8px #c2185b44;
+      margin-top: 0;
+    }
+    nav.navbar {
+      width: 100%;
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+    nav.navbar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+    }
+    nav.navbar a {
+      color: #fff;
+      text-decoration: none;
+      padding: 16px 24px;
+      display: block;
+      transition: background 0.3s;
+    }
+    nav.navbar a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+    }
+    #background-popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+    #background-popup > div {
+      background: #fff;
+      padding: 32px 24px;
+      border-radius: 16px;
+      box-shadow: 0 4px 32px #0003;
+      max-width: 90vw;
+      max-height: 90vh;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #background-options {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .bg-color-thumb {
+      width: 100px;
+      height: 70px;
+      cursor: pointer;
+      border-radius: 8px;
+      border: 2px solid #fff;
+    }
+    #close-bg-popup {
+      margin-top: 24px;
+      padding: 8px 24px;
+      border: none;
+      background: #f06292;
+      color: #fff;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    #corner-emojis {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 3000;
+      font-size: 2.2em;
+      user-select: none;
+    }
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(135deg, #f8bbd0 0%, #f06292 100%);
+      animation: gradient-animation 6s ease infinite;
+    }
+    @keyframes gradient-animation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
   </style>
 </head>
 <body>
-  <div class="overlay">
-    <div id="time" class="time"></div>
+  <div class="animated-bg"></div>
+  <nav class="navbar">
+    <ul>
+      <li><a href="#quote">Quote</a></li>
+      <li><a href="#background">Background</a></li>
+      <li><a href="#emojis">Emojis</a></li>
+      <li><a href="#clock">Clock</a></li>
+    </ul>
+  </nav>
+  <div class="center-content">
+    <div style="text-align:center;margin-bottom:18px;font-size:3.5em;font-weight:bold;color:#fff;text-shadow:0 2px 8px #c2185b44;">Hello, User</div>
+    <div class="quote" id="quote">
+      "The only way to do great work is to love what you do."<br>
+      <span style="font-size:0.8em; color:#ffd1e3;">– Steve Jobs</span>
+    </div>
+    <div class="clock" id="clock-container"></div>
+  </div>
+  <div id="background-popup">
+    <div>
+      <h2 style="color:#f06292;margin-bottom:16px;">Choose a Background</h2>
+      <div id="background-options">
+        <div class="bg-color-thumb" style="background:#f06292;"></div>
+        <div class="bg-color-thumb" style="background:#f8bbd0;"></div>
+        <div class="bg-color-thumb" style="background:#35424a;"></div>
+        <div class="bg-color-thumb" style="background:linear-gradient(135deg,#f8bbd0 0%,#f06292 100%);"></div>
+      </div>
+      <button id="close-bg-popup">Close</button>
+    </div>
+  </div>
+  <div id="clock-popup" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:2000;align-items:center;justify-content:center;">
+    <div style="background:#fff;padding:32px 24px;border-radius:16px;box-shadow:0 4px 32px #0003;max-width:90vw;max-height:90vh;overflow:auto;display:flex;flex-direction:column;align-items:center;">
+      <h2 style="color:#f06292;margin-bottom:16px;">Choose Clock Format</h2>
+      <div style="display:flex;gap:24px;">
+        <button id="clock-12h" style="padding:12px 32px;font-size:1.2em;border:none;background:#f06292;color:#fff;border-radius:8px;cursor:pointer;">12-Hour</button>
+        <button id="clock-24h" style="padding:12px 32px;font-size:1.2em;border:none;background:#f06292;color:#fff;border-radius:8px;cursor:pointer;">24-Hour</button>
+      </div>
+      <button id="close-clock-popup" style="margin-top:24px;padding:8px 24px;border:none;background:#f06292;color:#fff;border-radius:8px;font-size:1em;cursor:pointer;">Close</button>
+    </div>
+  </div>
+  <div id="emoji-popup" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:2000;align-items:center;justify-content:center;">
+    <div style="background:#fff;padding:32px 24px;border-radius:16px;box-shadow:0 4px 32px #0003;max-width:90vw;max-height:90vh;overflow:auto;display:flex;flex-direction:column;align-items:center;">
+      <h2 style="color:#f06292;margin-bottom:16px;">Choose Your Emoji Combo</h2>
+      <div id="emoji-options" style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;font-size:2em;">
+        <div class="emoji-combo" style="cursor:pointer;">🦄 🌈 ✨ 😎</div>
+        <div class="emoji-combo" style="cursor:pointer;">🐱 🐶 🐰 🦊</div>
+        <div class="emoji-combo" style="cursor:pointer;">🍕 🍔 🍟 🌭</div>
+        <div class="emoji-combo" style="cursor:pointer;">🚀 🌙 ⭐️ 🪐</div>
+      </div>
+      <button id="close-emoji-popup" style="margin-top:24px;padding:8px 24px;border:none;background:#f06292;color:#fff;border-radius:8px;font-size:1em;cursor:pointer;">Close</button>
+    </div>
+  </div>
+  <div id="quote-popup" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:2000;align-items:center;justify-content:center;">
+    <div style="background:#fff;padding:32px 24px;border-radius:16px;box-shadow:0 4px 32px #0003;max-width:90vw;max-height:90vh;overflow:auto;display:flex;flex-direction:column;align-items:center;">
+      <h2 style="color:#f06292;margin-bottom:16px;">Choose a Quote</h2>
+      <div id="quote-options" style="display:flex;gap:24px;flex-direction:column;align-items:center;">
+        <div class="quote-option" style="cursor:pointer;padding:12px 24px;background:#f8bbd0;border-radius:8px;margin-bottom:8px;max-width:400px;">"The only way to do great work is to love what you do."<br><span style='font-size:0.8em;color:#c2185b;'>– Steve Jobs</span></div>
+        <div class="quote-option" style="cursor:pointer;padding:12px 24px;background:#f8bbd0;border-radius:8px;margin-bottom:8px;max-width:400px;">"Success is not the key to happiness. Happiness is the key to success."<br><span style='font-size:0.8em;color:#c2185b;'>– Albert Schweitzer</span></div>
+        <div class="quote-option" style="cursor:pointer;padding:12px 24px;background:#f8bbd0;border-radius:8px;margin-bottom:8px;max-width:400px;">"Believe you can and you're halfway there."<br><span style='font-size:0.8em;color:#c2185b;'>– Theodore Roosevelt</span></div>
+        <div class="quote-option" style="cursor:pointer;padding:12px 24px;background:#f8bbd0;border-radius:8px;margin-bottom:8px;max-width:400px;">"You miss 100% of the shots you don't take."<br><span style='font-size:0.8em;color:#c2185b;'>– Wayne Gretzky</span></div>
+      </div>
+      <button id="close-quote-popup" style="margin-top:24px;padding:8px 24px;border:none;background:#f06292;color:#fff;border-radius:8px;font-size:1em;cursor:pointer;">Close</button>
+    </div>
+  </div>
+  <div id="corner-emojis">
+    🦄 🌈 ✨ 😎
   </div>
   <script>
+    let is24HourFormat = false;
+
     function updateTime() {
       const now = new Date();
       let hours = now.getHours();
@@ -44,10 +213,91 @@
       const ampm = hours >= 12 ? 'PM' : 'AM';
       hours = hours % 12;
       hours = hours ? hours : 12; // the hour '0' should be '12'
-      document.getElementById('time').textContent = `${hours}:${minutes} ${ampm}`;
+      if (is24HourFormat) {
+        document.getElementById('clock-container').textContent = `${String(now.getHours()).padStart(2, '0')}:${minutes}`;
+      } else {
+        document.getElementById('clock-container').textContent = `${hours}:${minutes} ${ampm}`;
+      }
     }
     setInterval(updateTime, 1000);
     updateTime();
+
+    document.querySelector('a[href="#background"]').addEventListener('click', function() {
+      document.getElementById('background-popup').style.display = 'flex';
+    });
+
+    document.getElementById('close-bg-popup').addEventListener('click', function() {
+      document.getElementById('background-popup').style.display = 'none';
+    });
+
+    document.querySelectorAll('.bg-color-thumb').forEach(function(div) {
+      div.addEventListener('click', function() {
+        // Remove any animated background if present
+        var animatedBg = document.querySelector('.animated-bg');
+        if (animatedBg) animatedBg.style.display = 'none';
+        // Use the backgroundColor property for solid colors, or background for gradients
+        var bg = div.style.background;
+        if (bg.includes('gradient')) {
+          document.body.style.background = bg;
+        } else {
+          document.body.style.background = div.style.backgroundColor || bg;
+        }
+        document.body.style.backgroundImage = '';
+        document.getElementById('background-popup').style.display = 'none';
+      });
+    });
+
+    document.getElementById('clock-container').addEventListener('click', function() {
+      document.getElementById('clock-popup').style.display = 'flex';
+    });
+
+    document.getElementById('close-clock-popup').addEventListener('click', function() {
+      document.getElementById('clock-popup').style.display = 'none';
+    });
+
+    document.getElementById('clock-12h').addEventListener('click', function() {
+      is24HourFormat = false;
+      updateTime();
+      document.getElementById('clock-popup').style.display = 'none';
+    });
+
+    document.getElementById('clock-24h').addEventListener('click', function() {
+      is24HourFormat = true;
+      updateTime();
+      document.getElementById('clock-popup').style.display = 'none';
+    });
+
+    document.querySelector('a[href="#emojis"]').addEventListener('click', function() {
+      document.getElementById('emoji-popup').style.display = 'flex';
+    });
+
+    document.getElementById('close-emoji-popup').addEventListener('click', function() {
+      document.getElementById('emoji-popup').style.display = 'none';
+    });
+
+    document.querySelectorAll('.emoji-combo').forEach(function(combo) {
+      combo.addEventListener('click', function() {
+        const emojis = combo.textContent.trim();
+        document.getElementById('corner-emojis').textContent = emojis;
+        document.getElementById('emoji-popup').style.display = 'none';
+      });
+    });
+
+    document.querySelector('a[href="#quote"]').addEventListener('click', function() {
+      document.getElementById('quote-popup').style.display = 'flex';
+    });
+
+    document.getElementById('close-quote-popup').addEventListener('click', function() {
+      document.getElementById('quote-popup').style.display = 'none';
+    });
+
+    document.querySelectorAll('.quote-option').forEach(function(option) {
+      option.addEventListener('click', function() {
+        const selectedQuote = option.textContent.trim();
+        document.getElementById('quote').innerHTML = selectedQuote;
+        document.getElementById('quote-popup').style.display = 'none';
+      });
+    });
   </script>
 </body>
 </html>

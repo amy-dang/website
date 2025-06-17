@@ -10,10 +10,10 @@
     <div style="background: #ffd700; color: #222; text-align: center; padding: 12px; font-size: 1.3em; font-weight: bold;">TEST MESSAGE: If you see this, updates are working!</div>
     <nav class="navbar outlined-navbar">
         <ul>
-            <li><a href="#background">Background</a></li>
             <li><a href="#quote">Quote</a></li>
+            <li><a href="#background">Background</a></li>
+            <li><a href="#emoji">Emoji</a></li>
             <li><a href="#clock">Clock</a></li>
-            <li><a href="#settings">Settings</a></li>
         </ul>
     </nav>
     <header>
@@ -35,6 +35,19 @@
         <section id="contact">
             <h2>Contact</h2>
             <p>You can reach me at myemail@example.com.</p>
+        </section>
+        <section id="quote">
+            <h2>Quote</h2>
+            <blockquote style="font-size:1.3em; color:#c2185b; margin: 24px 0; border-left: 4px solid #ff69b4; padding-left: 16px;">
+                "The only way to do great work is to love what you do."<br>
+                <span style="font-size:0.9em; color:#888;">– Steve Jobs</span>
+            </blockquote>
+        </section>
+        <section id="clock">
+            <h2>Clock</h2>
+            <div id="clock-container" style="font-size:2em; color:#333; margin: 24px 0;">
+                <!-- Clock will be rendered here by JS -->
+            </div>
         </section>
     </main>
     <footer>

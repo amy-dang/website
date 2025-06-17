@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background: linear-gradient(135deg, #f8bbd0 0%, #f06292 100%) fixed;
 }
 
 header {
@@ -45,7 +45,7 @@ a:hover {
 }
 
 .navbar {
-    background: #222;
+    background: #ff69b4;
     color: #fff;
     padding: 0;
     margin: 0;
@@ -58,9 +58,11 @@ a:hover {
     padding: 0;
     display: flex;
     justify-content: center;
+    gap: 80px;
 }
 .navbar li {
-    margin: 0 20px;
+    margin: 0;
+    padding: 0;
 }
 .navbar a {
     color: #fff;
@@ -74,8 +76,9 @@ a:hover {
     color: #ffd700;
 }
 
-.outlined-navbar {
-    border: 3px solid #ffd700;
-    outline: 3px solid #222;
+.navbar.outlined-navbar {
+    border: 3px solid #fff;
+    outline: 3px solid #f06292;
     outline-offset: 3px;
+    /* background removed to allow .navbar's solid pink to show */
 }
